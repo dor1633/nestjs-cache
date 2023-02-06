@@ -7,7 +7,7 @@ import { ConfigurableModuleClass } from '@nestjs/common/cache/cache.module-defin
 import { AsyncProviderFactory } from 'lib/types/async-provider-factory';
 import { CacheMetadata } from 'lib/types/cache-metadata';
 import { createAsyncProviders, createProviders } from './cache.providers';
-import { DEFAULT_CREATED_CACHE } from './constansts';
+import { DEFAULT_CREATED_CACHE } from './cache.constansts';
 
 @Module({})
 export class CacheModule extends ConfigurableModuleClass {

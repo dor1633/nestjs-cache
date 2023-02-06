@@ -2,7 +2,7 @@ import { Provider } from '@nestjs/common';
 import { caching } from 'cache-manager'
 import { AsyncProviderFactory } from 'lib/types/async-provider-factory';
 import { CacheMetadata } from 'lib/types/cache-metadata';
-import { DEFAULT_CACHE_CONFIG } from './constansts';
+import { DEFAULT_CACHE_CONFIG } from './cache.constansts';
 
 export function createProviders(cachesOptions: CacheMetadata[]): Provider[] {
     return cachesOptions.map(cacheOptions => {
