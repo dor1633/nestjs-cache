@@ -1,4 +1,4 @@
-import { CacheMetadata } from "lib/types/cache-metadata";
+import { CacheMetadata } from "../types/cache-metadata";
 
 export const DEFAULT_CACHE_CONFIG = {
     ttl: 5,
@@ -6,8 +6,8 @@ export const DEFAULT_CACHE_CONFIG = {
     store: 'memory',
 };
 
-export const DEFAULT_CACHE_NAME = "CACHE_INSTANCE";
+export const CACHE_DEFAULT_NAME = "CACHE_INSTANCE";
 
 export const DEFAULT_CREATED_CACHE: CacheMetadata[] = [{
-    cacheName: DEFAULT_CACHE_NAME
+    cacheName: CACHE_DEFAULT_NAME
 }]
