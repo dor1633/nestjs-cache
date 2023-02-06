@@ -7,25 +7,27 @@ import { ConfigurableModuleClass } from '@nestjs/common/cache/cache.module-defin
 import { AsyncProviderFactory } from 'lib/types/async-provider-factory';
 import { CacheMetadata } from 'lib/types/cache-metadata';
 import { createAsyncProviders, createProviders } from './cache.providers';
+import { DEFAULT_CREATED_CACHE } from './constansts';
 
 @Module({})
 export class CacheModule extends ConfigurableModuleClass {
-    static register(options: CacheMetadata[]): DynamicModule {
-        const providers = createProviders(options);
+    static register(cacheOptions: CacheMetadata[] = DEFAULT_CREATED_CACHE): DynamicModule {
+        const providers = createProviders(cacheOptions);
         return {
-            ...super.register(options),
+            ...super.register(cacheOptions),
             providers,
             exports: providers
         };
     }
 
-    static registerAsync(factories: AsyncProviderFactory[]): DynamicModule {
-        const providers = createAsyncProviders(factories);
-        const factoriesImports = factories.map(factory => factory.imports || []);
-        const uniqImports = new Set(flatten(factoriesImports));
+    static registerAsync(cachesFactories: AsyncProviderFactory[]): DynamicModule {
+        const providers = createAsyncProviders(cachesFactories);
+        const factoriesImports = cachesFactories.map(factory => factory.imports || []);
+        const uniqueImports = new Set(flatten(factoriesImports));
+
         return {
-            ...super.register(factories),
-            imports: [...uniqImports],
+            ...super.register(cachesFactories),
+            imports: [...uniqueImports],
             providers,
             exports: providers
         };

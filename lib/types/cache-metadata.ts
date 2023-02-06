@@ -1,3 +1,3 @@
 export type CacheMetadata = {
-    cacheName: string
+    cacheName: string;
 } & Record<string, any>

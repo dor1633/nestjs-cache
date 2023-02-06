@@ -2,27 +2,28 @@ import { Provider } from '@nestjs/common';
 import { caching } from 'cache-manager'
 import { AsyncProviderFactory } from 'lib/types/async-provider-factory';
 import { CacheMetadata } from 'lib/types/cache-metadata';
+import { DEFAULT_CACHE_CONFIG } from './constansts';
 
-export function createProviders(configs: CacheMetadata[]): Provider[] {
-    return configs.map((config) => {
+export function createProviders(cachesOptions: CacheMetadata[]): Provider[] {
+    return cachesOptions.map(cacheOptions => {
         return {
-            provide: config.cacheName,
+            provide: cacheOptions.cacheName,
             useFactory: () => {
-                return caching(config)
+                return caching({ ...DEFAULT_CACHE_CONFIG, ...cacheOptions })
             }
         }
     });
 }
 
-export function createAsyncProviders(configs: AsyncProviderFactory[]): Provider[] {
-    return configs.map(config => {
+export function createAsyncProviders(cachesFactories: AsyncProviderFactory[]): Provider[] {
+    return cachesFactories.map(cacheFactory => {
         return {
-            provide: config.cacheName,
+            provide: cacheFactory.cacheName,
             useFactory: async (...args: any) => {
-                const conf = await config.useFactory(...args)
-                return caching(conf);
+                const cacheOptions = await cacheFactory.useFactory(...args)
+                return caching({ ...DEFAULT_CACHE_CONFIG, ...cacheOptions });
             },
-            inject: [...(config.inject || [])]
+            inject: [...(cacheFactory.inject || [])]
         };
     })
 }
