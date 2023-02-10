@@ -3,20 +3,19 @@ import {
     flatten,
     Module,
 } from '@nestjs/common';
-import { ConfigurableModuleClass } from '@nestjs/common/cache/cache.module-definition';
 import { AsyncProviderFactory } from '../types/async-provider-factory';
 import { CacheMetadata } from '../types/cache-metadata';
 import { DEFAULT_CREATED_CACHE } from '.';
 import { createAsyncProviders, createProviders } from './cache.providers';
 
 @Module({})
-export class CacheModule extends ConfigurableModuleClass {
+export class CacheModule {
     static register(sendCacheOptions?: CacheMetadata[]): DynamicModule {
         const cacheOptions = sendCacheOptions || DEFAULT_CREATED_CACHE;
         const providers = createProviders(cacheOptions);
 
         return {
-            ...super.register(cacheOptions),
+            module: CacheModule,
             providers,
             exports: providers
         };
@@ -28,7 +27,7 @@ export class CacheModule extends ConfigurableModuleClass {
         const uniqueImports = new Set(flatten(factoriesImports));
 
         return {
-            ...super.register(cachesFactories),
+            module: CacheModule,
             imports: [...uniqueImports],
             providers,
             exports: providers
