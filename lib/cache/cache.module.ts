@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { AsyncProviderFactory } from '../types/async-provider-factory';
 import { CacheMetadata } from '../types/cache-metadata';
-import { DEFAULT_CREATED_CACHE } from '.';
+import { DEFAULT_CREATED_CACHE } from './cache.constansts';
 import { createAsyncProviders, createProviders } from './cache.providers';
 
 @Module({})
