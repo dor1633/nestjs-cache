@@ -1,10 +1,14 @@
 {
   "name": "nestjs-cache",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "author": "",
   "license": "UNLICENSED",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dor1633/nestjs-cache"
+  },
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "nest build",
