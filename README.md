@@ -4,7 +4,7 @@ Flexible cache module for NestJS.
 
 ## motivation
 
-Nest is a very flexible framework, but there is a problem in the cache soloution that Nest gives us: nest gives us the option to inject only **one** cache instance called `CACHE_MANAGER`, but what if we want multiple caches with diffrent configurations per cache? or just make the caches SRP.
+Nest is a very flexible framework, but there is a problem in the cache solution that Nest gives us: nest gives us the option to inject only **one** cache instance called `CACHE_MANAGER`, but what if we want multiple caches with diffrent configurations per cache? or just make the caches SRP.
 
 ## Installation
 
